@@ -1,0 +1,113 @@
+/* CSS 초기화 */
+* {
+  box-sizing: border-box;
+}
+
+/* HTML, Body 초기화 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Root 앱 컨테이너 설정 */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/**
+ * 컬러 팔레트 디자인 시스템 (출처: 컬러 팔레트 디자인 시스템.md)
+ * 컴포넌트에서는 sx 안에서 'var(--color-xxx)' 형태로 사용합니다.
+ */
+:root {
+  /* Primary Colors */
+  --color-primary: #FFC8EA;
+  --color-primary-light: #FFD8F0;
+  --color-primary-dark: #E8A5CC;
+
+  /* Secondary Colors */
+  --color-secondary: #977190;
+  --color-accent: #FF91C3;
+
+  /* Background Colors */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #FFD8F0;
+
+  /* Text Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #666666;
+  --color-text-muted: #A8A8A8;
+
+  /* Interactive Colors */
+  --color-button-primary: #FF91C3;
+  --color-button-hover: #F772AF;
+  --color-link: #804862;
+  --color-link-hover: #5E3248;
+
+  /* Gradient */
+  --gradient-hero: linear-gradient(180deg, #FEC9EB 0%, #FFD8F0 100%);
+
+  /* Border */
+  --color-border-default: #000000;
+  --color-border-inverse: #FFFFFF;
+  --color-border-track: #CBABBF;
+
+  /* Icon */
+  --color-icon-muted: #65545F;
+
+  /* Pastel (카드, 태그 배경) */
+  --color-pastel-lavender: #E1DCFC;
+  --color-pastel-mint: #A9F7F3;
+  --color-pastel-blue: #A9B7D6;
+  --color-pastel-lime: #E9EFE3;
+
+  /* 프로젝트 적용 변수: 파스텔 섹션 배경 (다크모드에서는 bg-secondary 로 교체) */
+  --surface-pastel-lavender: var(--color-pastel-lavender);
+  --surface-pastel-mint: var(--color-pastel-mint);
+}
+
+/* 다크모드 (디자인 시스템 문서의 [파생] 값) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #FFC8EA;
+    --color-primary-light: #3A2A35;
+    --color-primary-dark: #FFD8F0;
+
+    --color-secondary: #C9A3C0;
+    --color-accent: #FF91C3;
+
+    --color-bg-primary: #1A1418;
+    --color-bg-secondary: #2A2128;
+
+    --color-text-primary: #F5EEF2;
+    --color-text-secondary: #C9B8C3;
+    --color-text-muted: #8E7F89;
+
+    --color-button-primary: #FF91C3;
+    --color-button-hover: #FFB0D5;
+    --color-link: #FFB3DA;
+    --color-link-hover: #FFD8F0;
+
+    --color-border-default: #F5EEF2;
+    --gradient-hero: linear-gradient(180deg, #3A2A35 0%, #1A1418 100%);
+
+    /* 파스텔 배경은 다크모드에서 너무 튀므로 bg-secondary 로 교체 */
+    --surface-pastel-lavender: var(--color-bg-secondary);
+    --surface-pastel-mint: var(--color-bg-secondary);
+  }
+}
+
+/* 링크 */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
