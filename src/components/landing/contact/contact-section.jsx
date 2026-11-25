@@ -55,6 +55,17 @@ function ContactSection() {
         >
           CONTACT
         </Typography>
+        <Typography
+          sx={{
+            mt: 1.5,
+            fontSize: { xs: '0.95rem', md: '1rem' },
+            fontWeight: 300,
+            letterSpacing: '0.05em',
+            color: 'var(--mono-text-muted)',
+          }}
+        >
+          방문해주셔서 감사합니다
+        </Typography>
         <Box sx={{ width: 32, height: 2, bgcolor: 'var(--color-accent)', mx: 'auto', mt: 2 }} />
       </Box>
 
