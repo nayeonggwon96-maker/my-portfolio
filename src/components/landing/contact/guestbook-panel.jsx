@@ -19,7 +19,7 @@ import GuestbookList from './guestbook-list';
  */
 function GuestbookPanel({ entries, isLoading, loadError, onSubmit }) {
   return (
-    <ContactPanel eyebrow="GUESTBOOK" title="쪽지 남기기">
+    <ContactPanel eyebrow="GUESTBOOK" title="쪽지 남기기" description="편하게 쪽지 남겨주세요">
       <GuestbookForm onSubmit={ onSubmit } />
 
       <Box sx={{ borderTop: '1px solid var(--mono-border)', my: { xs: 4, md: 5 } }} />
