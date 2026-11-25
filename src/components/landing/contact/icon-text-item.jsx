@@ -10,11 +10,12 @@ import { Box, Stack, Typography } from '@mui/material';
  * @param {string} label - 위쪽 작은 라벨 (예: 'EMAIL') [Required]
  * @param {string} value - 아래쪽 표시 값 [Required]
  * @param {string} href - 링크 주소 (mailto:, tel:, https:// 등) [Optional]
+ * @param {string} tint - 아이콘 동그라미 배경색 (CSS 값) [Optional, 기본값: 'var(--note-pink)']
  *
  * Example usage:
  * <IconTextItem Icon={ GitHubIcon } label="GITHUB" value="@my-id" href="https://github.com/my-id" />
  */
-function IconTextItem({ Icon, label, value, href }) {
+function IconTextItem({ Icon, label, value, href, tint = 'var(--note-pink)' }) {
   const isExternal = href?.startsWith('http');
 
   return (
@@ -25,18 +26,18 @@ function IconTextItem({ Icon, label, value, href }) {
           width: 44,
           height: 44,
           borderRadius: '50%',
-          border: '1px solid var(--mono-border)',
+          bgcolor: tint,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'var(--mono-ink)',
+          color: 'var(--cute-ink)',
         }}
       >
         <Icon sx={{ fontSize: 20 }} aria-hidden />
       </Box>
 
       <Box sx={{ minWidth: 0 }}>
-        <Typography sx={{ fontSize: '0.65rem', letterSpacing: '0.18em', color: 'var(--mono-text-muted)' }}>
+        <Typography sx={{ fontSize: '0.65rem', letterSpacing: '0.18em', color: 'var(--cute-muted)' }}>
           { label }
         </Typography>
         { href ? (
@@ -46,7 +47,7 @@ function IconTextItem({ Icon, label, value, href }) {
             target={ isExternal ? '_blank' : undefined }
             rel={ isExternal ? 'noopener noreferrer' : undefined }
             sx={{
-              color: 'var(--mono-ink)',
+              color: 'var(--cute-ink)',
               fontSize: '1rem',
               wordBreak: 'break-all',
               '&:hover': { color: 'var(--color-accent)', textDecoration: 'none' },
@@ -55,7 +56,7 @@ function IconTextItem({ Icon, label, value, href }) {
             { value }
           </Box>
         ) : (
-          <Typography sx={{ fontSize: '1rem', color: 'var(--mono-ink)' }}>{ value }</Typography>
+          <Typography sx={{ fontSize: '1rem', color: 'var(--cute-ink)' }}>{ value }</Typography>
         ) }
       </Box>
     </Stack>

@@ -18,22 +18,22 @@ const INITIAL_FORM = {
 const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE_PATTERN = /^[0-9+\- ]{7,20}$/;
 
-/** 테두리형 입력칸 공통 스타일 (무채색) */
+/** 테두리형 입력칸 공통 스타일 (귀여운 테마: 둥근 모서리 + 핑크 포커스) */
 const fieldSx = {
-  '& .MuiInputLabel-root': { color: 'var(--mono-text-muted)' },
-  '& .MuiInputLabel-root.Mui-focused': { color: 'var(--mono-ink)' },
+  '& .MuiInputLabel-root': { color: 'var(--cute-muted)' },
+  '& .MuiInputLabel-root.Mui-focused': { color: 'var(--cute-accent)' },
   '& .MuiInputLabel-root.Mui-error': { color: 'error.main' },
   '& .MuiOutlinedInput-root': {
-    borderRadius: 1,
-    bgcolor: 'var(--mono-surface)',
-    color: 'var(--mono-ink)',
-    '& fieldset': { borderColor: 'var(--mono-border)' },
-    '&:hover fieldset': { borderColor: 'var(--mono-text-muted)' },
-    '&.Mui-focused fieldset': { borderColor: 'var(--mono-ink)', borderWidth: 1 },
+    borderRadius: '16px',
+    bgcolor: 'var(--cute-soft)',
+    color: 'var(--cute-ink)',
+    '& fieldset': { borderColor: 'var(--cute-border)', borderWidth: 2 },
+    '&:hover fieldset': { borderColor: 'var(--cute-accent)' },
+    '&.Mui-focused fieldset': { borderColor: 'var(--cute-accent)', borderWidth: 2 },
     '&.Mui-error fieldset': { borderColor: 'error.main' },
   },
   '& .MuiFormHelperText-root': { mx: 0.5 },
-  '& .MuiSvgIcon-root': { color: 'var(--mono-text-muted)' },
+  '& .MuiSvgIcon-root': { color: 'var(--cute-muted)' },
 };
 
 /**
@@ -136,7 +136,7 @@ function GuestbookForm({ onSubmit }) {
     <Stack component="form" spacing={ 2.5 } onSubmit={ handleSubmit } noValidate>
       {/* 이모지 선택 */}
       <Box>
-        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)', mb: 1 }}>
+        <Typography sx={{ fontSize: '0.75rem', color: 'var(--cute-muted)', mb: 1 }}>
           오늘의 기분
         </Typography>
         <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }} role="radiogroup" aria-label="이모지 선택">
@@ -151,16 +151,17 @@ function GuestbookForm({ onSubmit }) {
                 aria-checked={ isSelected }
                 onClick={ () => setForm((prev) => ({ ...prev, emoji })) }
                 sx={{
-                  width: 36,
-                  height: 36,
-                  fontSize: '1.1rem',
+                  width: 40,
+                  height: 40,
+                  fontSize: '1.2rem',
                   cursor: 'pointer',
                   borderRadius: '50%',
-                  border: '1px solid',
-                  borderColor: isSelected ? 'var(--mono-ink)' : 'var(--mono-border)',
-                  bgcolor: isSelected ? 'var(--mono-surface-muted)' : 'transparent',
+                  border: '2px solid',
+                  borderColor: isSelected ? 'var(--cute-accent)' : 'var(--cute-border)',
+                  bgcolor: isSelected ? 'var(--note-pink)' : 'var(--cute-card)',
+                  transform: isSelected ? 'scale(1.12)' : 'none',
                   transition: 'all 0.15s',
-                  '&:hover': { borderColor: 'var(--mono-ink)' },
+                  '&:hover': { borderColor: 'var(--cute-accent)', transform: 'scale(1.12) rotate(-6deg)' },
                 }}
               >
                 { emoji }
@@ -209,7 +210,7 @@ function GuestbookForm({ onSubmit }) {
               component="img"
               src={ photoPreview }
               alt="업로드할 사진 미리보기"
-              sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1.5 }}
+              sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }}
             />
             <IconButton
               size="small"
@@ -219,9 +220,9 @@ function GuestbookForm({ onSubmit }) {
                 position: 'absolute',
                 top: -10,
                 right: -10,
-                bgcolor: 'var(--mono-ink)',
-                color: 'var(--mono-ink-inverse)',
-                '&:hover': { bgcolor: 'var(--mono-ink)' },
+                bgcolor: 'var(--cute-accent)',
+                color: 'var(--cute-on-accent)',
+                '&:hover': { bgcolor: 'var(--cute-accent-hover)' },
               }}
             >
               <CloseIcon sx={{ fontSize: 14 }} />
@@ -232,7 +233,7 @@ function GuestbookForm({ onSubmit }) {
             variant="text"
             startIcon={ <AddPhotoAlternateOutlinedIcon /> }
             onClick={ () => fileInputRef.current?.click() }
-            sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
+            sx={{ color: 'var(--cute-accent)', textTransform: 'none', px: 0, '&:hover': { color: 'var(--cute-accent-hover)', bgcolor: 'transparent' } }}
           >
             사진 첨부 (선택 · 5MB 이하)
           </Button>
@@ -241,7 +242,7 @@ function GuestbookForm({ onSubmit }) {
 
       {/* 선택 정보: 처음부터 입력칸으로 표시 */}
       <Box>
-        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)', mb: 1.5 }}>
+        <Typography sx={{ fontSize: '0.75rem', color: 'var(--cute-muted)', mb: 1.5 }}>
           추가 정보 (선택)
         </Typography>
         <Stack spacing={ 2 }>
@@ -291,8 +292,8 @@ function GuestbookForm({ onSubmit }) {
             />
           </Stack>
           <Stack direction="row" spacing={ 0.75 } sx={{ alignItems: 'center' }}>
-            <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
-            <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
+            <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--cute-muted)' }} />
+            <Typography sx={{ fontSize: '0.75rem', color: 'var(--cute-muted)' }}>
               이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
             </Typography>
           </Stack>
@@ -300,7 +301,7 @@ function GuestbookForm({ onSubmit }) {
       </Box>
 
       { status && (
-        <Alert severity={ status.type } onClose={ () => setStatus(null) } sx={{ borderRadius: 1.5 }}>
+        <Alert severity={ status.type } onClose={ () => setStatus(null) } sx={{ borderRadius: '16px' }}>
           { status.text }
         </Alert>
       ) }
@@ -311,18 +312,21 @@ function GuestbookForm({ onSubmit }) {
         disableElevation
         disabled={ isSubmitting }
         sx={{
-          py: 1.4,
-          px: 6,
+          py: 1.3,
+          px: 5,
           alignSelf: { md: 'flex-end' },
-          borderRadius: 1,
-          bgcolor: 'var(--mono-ink)',
-          color: 'var(--mono-ink-inverse)',
-          letterSpacing: '0.15em',
-          fontWeight: 600,
-          '&:hover': { bgcolor: 'var(--color-accent)', color: '#000000' },
+          borderRadius: 999,
+          bgcolor: 'var(--cute-accent)',
+          color: 'var(--cute-on-accent)',
+          fontFamily: 'var(--font-cute)',
+          fontSize: '1.05rem',
+          boxShadow: '0 4px 0 var(--cute-accent-hover)',
+          transition: 'all 0.15s',
+          '&:hover': { bgcolor: 'var(--cute-accent-hover)', transform: 'translateY(-1px)', boxShadow: '0 5px 0 var(--cute-accent-hover)' },
+          '&:active': { transform: 'translateY(3px)', boxShadow: '0 1px 0 var(--cute-accent-hover)' },
         }}
       >
-        { isSubmitting ? '등록 중...' : 'SEND' }
+        { isSubmitting ? '보내는 중...' : '쪽지 보내기 💌' }
       </Button>
     </Stack>
   );

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import App from './App.jsx';
 import theme from './theme.js';
+import '@fontsource/jua/400.css';
 import './index.css';
 
 /**

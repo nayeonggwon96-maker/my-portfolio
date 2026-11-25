@@ -22,13 +22,13 @@ function GuestbookPanel({ entries, isLoading, loadError, onSubmit }) {
     <ContactPanel eyebrow="GUESTBOOK" title="쪽지 남기기" description="편하게 쪽지 남겨주세요">
       <GuestbookForm onSubmit={ onSubmit } />
 
-      <Box sx={{ borderTop: '1px solid var(--mono-border)', my: { xs: 4, md: 5 } }} />
+      <Box sx={{ borderTop: '2px dashed var(--cute-border)', my: { xs: 4, md: 5 } }} />
 
       <Typography
         component="h4"
-        sx={{ m: 0, mb: 2.5, fontSize: '1rem', fontWeight: 600, color: 'var(--mono-ink)' }}
+        sx={{ m: 0, mb: 2.5, fontFamily: 'var(--font-cute)', fontSize: '1.2rem', fontWeight: 400, color: 'var(--cute-ink)' }}
       >
-        받은 쪽지
+        받은 쪽지 💬
       </Typography>
       <GuestbookList entries={ entries } isLoading={ isLoading } loadError={ loadError } />
     </ContactPanel>

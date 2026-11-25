@@ -23,7 +23,7 @@ function GuestbookList({ entries, isLoading, loadError }) {
     if (isLoading) {
       return (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
-          <CircularProgress size={ 24 } sx={{ color: 'var(--mono-ink)' }} />
+          <CircularProgress size={ 24 } sx={{ color: 'var(--cute-ink)' }} />
         </Box>
       );
     }
@@ -32,7 +32,7 @@ function GuestbookList({ entries, isLoading, loadError }) {
     }
     if (entries.length === 0) {
       return (
-        <Typography sx={{ color: 'var(--mono-text-muted)', textAlign: 'center', py: 6, fontSize: '0.9rem' }}>
+        <Typography sx={{ color: 'var(--cute-muted)', textAlign: 'center', py: 6, fontSize: '0.9rem' }}>
           아직 쪽지가 없어요.
           <br />
           첫 번째 쪽지를 남겨주세요 💌
@@ -42,12 +42,11 @@ function GuestbookList({ entries, isLoading, loadError }) {
     return (
       <Stack
         component="ul"
-        divider={ <Box component="li" aria-hidden sx={{ borderTop: '1px solid var(--mono-border)' }} /> }
+        spacing={ 1.5 }
         sx={{
           listStyle: 'none',
           m: 0,
           p: 0,
-          borderTop: '1px solid var(--mono-ink)',
           maxHeight: { xs: 480, md: 620 },
           overflowY: 'auto',
         }}

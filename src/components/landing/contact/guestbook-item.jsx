@@ -2,10 +2,10 @@ import { Box, Stack, Typography } from '@mui/material';
 import { formatDate } from '../../../utils/format-date';
 
 /**
- * 이모지 동그라미 배경색 목록 (index.css 의 --note-* 변수, 다크모드 자동 대응)
+ * 말풍선 배경색 목록 (index.css 의 --note-* 변수, 다크모드 자동 대응)
  * 방명록 id 로 색을 고르므로 새 글이 추가돼도 기존 글 색은 바뀌지 않습니다.
  */
-const AVATAR_COLORS = [
+const BUBBLE_COLORS = [
   'var(--note-pink)',
   'var(--note-lavender)',
   'var(--note-mint)',
@@ -15,7 +15,7 @@ const AVATAR_COLORS = [
 
 /**
  * GuestbookItem 컴포넌트
- * 방명록 한 개를 리스트의 한 줄로 보여줍니다.
+ * 방명록 한 개를 리스트의 한 줄(파스텔 말풍선)로 보여줍니다.
  * 왼쪽: 이모지 동그라미 / 가운데: 이름·소속·날짜 + 메시지 / 오른쪽: 첨부 사진(있을 때)
  *
  * Props:
@@ -29,7 +29,17 @@ function GuestbookItem({ entry, onPhotoClick }) {
   const meta = [entry.affiliation, entry.age_group].filter(Boolean).join(' · ');
 
   return (
-    <Stack component="li" direction="row" spacing={ 2 } sx={{ alignItems: 'flex-start', py: 2.25 }}>
+    <Stack
+      component="li"
+      direction="row"
+      spacing={ 2 }
+      sx={{
+        alignItems: 'flex-start',
+        p: { xs: 1.75, sm: 2 },
+        borderRadius: '20px',
+        bgcolor: BUBBLE_COLORS[entry.id % BUBBLE_COLORS.length],
+      }}
+    >
       {/* 이모지 */}
       <Box
         aria-hidden
@@ -38,11 +48,12 @@ function GuestbookItem({ entry, onPhotoClick }) {
           width: 44,
           height: 44,
           borderRadius: '50%',
-          bgcolor: AVATAR_COLORS[entry.id % AVATAR_COLORS.length],
+          bgcolor: 'var(--cute-card)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '1.3rem',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
         }}
       >
         { entry.emoji }
@@ -59,10 +70,10 @@ function GuestbookItem({ entry, onPhotoClick }) {
             mb: 0.75,
           }}
         >
-          <Typography sx={{ fontSize: '0.9rem', color: 'var(--mono-ink)' }}>
+          <Typography sx={{ fontSize: '0.9rem', color: 'var(--cute-ink)' }}>
             <Box component="span" sx={{ fontWeight: 600 }}>{ entry.display_name }</Box>
             { meta && (
-              <Box component="span" sx={{ color: 'var(--mono-text-muted)', fontSize: '0.8rem' }}>
+              <Box component="span" sx={{ color: 'var(--cute-muted)', fontSize: '0.8rem' }}>
                 { ` · ${meta}` }
               </Box>
             ) }
@@ -70,7 +81,7 @@ function GuestbookItem({ entry, onPhotoClick }) {
           <Typography
             component="time"
             dateTime={ entry.created_at }
-            sx={{ flexShrink: 0, fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}
+            sx={{ flexShrink: 0, fontSize: '0.75rem', color: 'var(--cute-muted)' }}
           >
             { formatDate(entry.created_at) }
           </Typography>
@@ -80,7 +91,7 @@ function GuestbookItem({ entry, onPhotoClick }) {
           sx={{
             fontSize: '0.95rem',
             lineHeight: 1.6,
-            color: 'var(--mono-ink)',
+            color: 'var(--cute-ink)',
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
           }}
@@ -103,7 +114,7 @@ function GuestbookItem({ entry, onPhotoClick }) {
             src={ entry.photo_url }
             alt={ `${entry.display_name}님이 첨부한 사진` }
             loading="lazy"
-            sx={{ display: 'block', width: 64, height: 64, objectFit: 'cover', borderRadius: 1.5 }}
+            sx={{ display: 'block', width: 64, height: 64, objectFit: 'cover', borderRadius: '12px' }}
           />
         </Box>
       ) }

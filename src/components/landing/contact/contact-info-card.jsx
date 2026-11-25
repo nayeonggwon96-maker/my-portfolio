@@ -16,8 +16,8 @@ function ContactInfoCard() {
   return (
     <ContactPanel eyebrow="CONTACT" title="연락처" variant="plain">
       <Stack component="ul" spacing={ 2.5 } sx={{ listStyle: 'none', m: 0, p: 0 }}>
-        { CONTACT_ITEMS.map(({ id, label, value, href, Icon }) => (
-          <IconTextItem key={ id } Icon={ Icon } label={ label } value={ value } href={ href } />
+        { CONTACT_ITEMS.map(({ id, label, value, href, Icon, tint }) => (
+          <IconTextItem key={ id } Icon={ Icon } label={ label } value={ value } href={ href } tint={ tint } />
         )) }
       </Stack>
     </ContactPanel>

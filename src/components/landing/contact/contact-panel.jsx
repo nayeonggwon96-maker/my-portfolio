@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 
 /**
  * ContactPanel 컴포넌트
- * Contact 섹션의 2x2 그리드에 들어가는 공통 카드 틀입니다.
+ * Contact 섹션에 들어가는 공통 카드 틀입니다. (귀여운 테마: 둥근 모서리 + 핑크 그림자)
  * 작은 영문 라벨 → 제목 → 내용 순서로 표시합니다.
  *
  * Props:
@@ -25,11 +25,12 @@ function ContactPanel({ eyebrow, title, description, children, variant = 'outlin
         display: 'flex',
         flexDirection: 'column',
         p: isPlain ? { xs: 1, md: 4 } : { xs: 3, md: 4 },
-        borderRadius: 2,
-        border: '1px solid',
-        borderColor: isPlain ? 'transparent' : 'var(--mono-border)',
-        bgcolor: isPlain ? 'transparent' : 'var(--mono-surface)',
-        color: 'var(--mono-ink)',
+        borderRadius: '28px',
+        border: '2px solid',
+        borderColor: isPlain ? 'transparent' : 'var(--cute-border)',
+        bgcolor: isPlain ? 'transparent' : 'var(--cute-card)',
+        boxShadow: isPlain ? 'none' : 'var(--cute-shadow)',
+        color: 'var(--cute-ink)',
       }}
     >
       <Typography
@@ -38,7 +39,7 @@ function ContactPanel({ eyebrow, title, description, children, variant = 'outlin
           fontSize: '0.7rem',
           fontWeight: 600,
           letterSpacing: '0.2em',
-          color: 'var(--color-accent)',
+          color: 'var(--cute-accent)',
           mb: 1,
         }}
       >
@@ -46,12 +47,18 @@ function ContactPanel({ eyebrow, title, description, children, variant = 'outlin
       </Typography>
       <Typography
         component="h3"
-        sx={{ m: 0, mb: description ? 0.75 : 3, fontSize: { xs: '1.15rem', md: '1.3rem' }, fontWeight: 600 }}
+        sx={{
+          m: 0,
+          mb: description ? 0.75 : 3,
+          fontFamily: 'var(--font-cute)',
+          fontSize: { xs: '1.35rem', md: '1.5rem' },
+          fontWeight: 400,
+        }}
       >
         { title }
       </Typography>
       { description && (
-        <Typography sx={{ m: 0, mb: 3, fontSize: '0.9rem', color: 'var(--mono-text-muted)' }}>
+        <Typography sx={{ m: 0, mb: 3, fontSize: '0.9rem', color: 'var(--cute-muted)' }}>
           { description }
         </Typography>
       ) }

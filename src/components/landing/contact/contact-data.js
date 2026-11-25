@@ -10,9 +10,9 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
  * href 가 있으면 클릭 시 메일/전화 앱이 열립니다.
  */
 export const CONTACT_ITEMS = [
-  { id: 'email', label: 'EMAIL', value: 'hello@example.com', href: 'mailto:hello@example.com', Icon: EmailOutlinedIcon },
-  { id: 'phone', label: 'PHONE', value: '010-0000-0000', href: 'tel:01000000000', Icon: PhoneIphoneIcon },
-  { id: 'location', label: 'LOCATION', value: 'Seoul, Korea', Icon: PlaceOutlinedIcon },
+  { id: 'email', label: 'EMAIL', value: 'hello@example.com', href: 'mailto:hello@example.com', tint: 'var(--note-pink)', Icon: EmailOutlinedIcon },
+  { id: 'phone', label: 'PHONE', value: '010-0000-0000', href: 'tel:01000000000', tint: 'var(--note-lavender)', Icon: PhoneIphoneIcon },
+  { id: 'location', label: 'LOCATION', value: 'Seoul, Korea', tint: 'var(--note-mint)', Icon: PlaceOutlinedIcon },
 ];
 
 /**
@@ -20,9 +20,9 @@ export const CONTACT_ITEMS = [
  * handle: 화면에 표시되는 계정 이름
  */
 export const SNS_LINKS = [
-  { id: 'github', label: 'GITHUB', handle: '@nayeonggwon96-maker', href: 'https://github.com/nayeonggwon96-maker', Icon: GitHubIcon },
-  { id: 'instagram', label: 'INSTAGRAM', handle: '@your_instagram', href: 'https://www.instagram.com/', Icon: InstagramIcon },
-  { id: 'linkedin', label: 'LINKEDIN', handle: 'your-linkedin', href: 'https://www.linkedin.com/', Icon: LinkedInIcon },
+  { id: 'github', label: 'GITHUB', handle: '@nayeonggwon96-maker', href: 'https://github.com/nayeonggwon96-maker', tint: 'var(--note-pink)', Icon: GitHubIcon },
+  { id: 'instagram', label: 'INSTAGRAM', handle: '@your_instagram', href: 'https://www.instagram.com/', tint: 'var(--note-lavender)', Icon: InstagramIcon },
+  { id: 'linkedin', label: 'LINKEDIN', handle: 'your-linkedin', href: 'https://www.linkedin.com/', tint: 'var(--note-mint)', Icon: LinkedInIcon },
 ];
 
 /** 방명록 '오늘의 기분'에서 고를 수 있는 이모지 (첫 번째가 기본 선택) */

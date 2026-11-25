@@ -69,15 +69,20 @@ html, body {
   --surface-pastel-lavender: var(--color-pastel-lavender);
   --surface-pastel-mint: var(--color-pastel-mint);
 
-  /* 무채색 톤 (Contact 섹션: 검정/흰색/회색 + 포인트 컬러 accent) */
-  --mono-ink: #111111;
-  --mono-ink-inverse: #FFFFFF;
-  --mono-surface: #FFFFFF;
-  --mono-surface-muted: #F5F5F5;
-  --mono-border: #E2E2E2;
-  --mono-text-muted: #8A8A8A;
+  /* 귀여운 테마 (Contact 섹션: 파스텔 + 둥근 모양) */
+  --font-cute: "Jua", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --cute-bg: linear-gradient(180deg, #FFF0F7 0%, #F4EFFF 100%);
+  --cute-card: #FFFFFF;
+  --cute-soft: #FFF5FA;
+  --cute-border: #FFD1E8;
+  --cute-ink: #4A3343;
+  --cute-muted: #A08896;
+  --cute-accent: #FF91C3;
+  --cute-accent-hover: #F772AF;
+  --cute-on-accent: #4A3343;
+  --cute-shadow: 0 8px 24px rgba(255, 145, 195, 0.18);
 
-  /* 방명록 쪽지 배경 (디자인 시스템 파스텔 계열을 연하게) */
+  /* 파스텔 포인트 (방명록 말풍선 · 아이콘 배경) */
   --note-pink: #FFE4F3;
   --note-lavender: #E8E4FD;
   --note-mint: #DDF8F6;
@@ -114,12 +119,16 @@ html, body {
     --surface-pastel-lavender: var(--color-bg-secondary);
     --surface-pastel-mint: var(--color-bg-secondary);
 
-    --mono-ink: #F2F2F2;
-    --mono-ink-inverse: #111111;
-    --mono-surface: #1C1C1C;
-    --mono-surface-muted: #262626;
-    --mono-border: #3A3A3A;
-    --mono-text-muted: #9A9A9A;
+    --cute-bg: linear-gradient(180deg, #2A1F27 0%, #1F1A2A 100%);
+    --cute-card: #2A2128;
+    --cute-soft: #332830;
+    --cute-border: #5A4052;
+    --cute-ink: #F5EEF2;
+    --cute-muted: #C9B8C3;
+    --cute-accent: #FF91C3;
+    --cute-accent-hover: #FFB0D5;
+    --cute-on-accent: #2A1F27;
+    --cute-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 
     /* 다크모드에서는 같은 색 계열의 어두운 톤 */
     --note-pink: #3A2A35;

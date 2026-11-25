@@ -16,8 +16,8 @@ function SnsLinksCard() {
   return (
     <ContactPanel eyebrow="FOLLOW" title="SNS" variant="plain">
       <Stack component="ul" spacing={ 2.5 } sx={{ listStyle: 'none', m: 0, p: 0 }}>
-        { SNS_LINKS.map(({ id, label, handle, href, Icon }) => (
-          <IconTextItem key={ id } Icon={ Icon } label={ label } value={ handle } href={ href } />
+        { SNS_LINKS.map(({ id, label, handle, href, Icon, tint }) => (
+          <IconTextItem key={ id } Icon={ Icon } label={ label } value={ handle } href={ href } tint={ tint } />
         )) }
       </Stack>
     </ContactPanel>

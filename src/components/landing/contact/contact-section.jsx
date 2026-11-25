@@ -6,7 +6,7 @@ import SnsLinksCard from './sns-links-card';
 
 /**
  * ContactSection 컴포넌트
- * Home 페이지의 Contact 섹션입니다. 무채색 톤으로 구성됩니다.
+ * Home 페이지의 Contact 섹션입니다. 파스텔 · 둥근 모양의 귀여운 테마로 구성됩니다.
  * - 윗줄: 연락처 | SNS (좌우 2칸)
  * - 아랫줄: 방명록 (쪽지 남기기 + 받은 쪽지, 가로 전체 1칸)
  * 모바일에서는 한 줄에 하나씩 세로로 쌓입니다.
@@ -26,10 +26,10 @@ function ContactSection() {
       aria-labelledby="contact-title"
       sx={{
         width: '100%',
-        bgcolor: 'var(--mono-surface)',
-        color: 'var(--mono-ink)',
-        border: '1px solid var(--mono-border)',
-        borderRadius: 3,
+        background: 'var(--cute-bg)',
+        color: 'var(--cute-ink)',
+        border: '2px solid var(--cute-border)',
+        borderRadius: '36px',
         px: { xs: 2, sm: 3, md: 5 },
         py: { xs: 4, md: 6 },
       }}
@@ -37,7 +37,17 @@ function ContactSection() {
       <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 5 } }}>
         <Typography
           component="span"
-          sx={{ fontSize: '0.75rem', letterSpacing: '0.3em', color: 'var(--mono-text-muted)' }}
+          sx={{
+            display: 'inline-block',
+            px: 1.5,
+            py: 0.5,
+            borderRadius: 999,
+            bgcolor: 'var(--cute-card)',
+            border: '1px solid var(--cute-border)',
+            fontSize: '0.75rem',
+            letterSpacing: '0.15em',
+            color: 'var(--cute-accent)',
+          }}
         >
           SECTION 05
         </Typography>
@@ -47,25 +57,32 @@ function ContactSection() {
           sx={{
             m: 0,
             mt: 1,
-            fontSize: { xs: '2rem', md: '2.75rem' },
-            fontWeight: 300,
-            letterSpacing: '0.12em',
+            fontFamily: 'var(--font-cute)',
+            fontSize: { xs: '2.25rem', md: '3rem' },
+            fontWeight: 400,
+            letterSpacing: '0.05em',
           }}
         >
+          <Box component="span" aria-hidden sx={{ fontSize: '0.6em', mr: 1 }}>🎀</Box>
           CONTACT
+          <Box component="span" aria-hidden sx={{ fontSize: '0.6em', ml: 1 }}>✨</Box>
         </Typography>
         <Typography
           sx={{
             mt: 1.5,
             fontSize: { xs: '0.95rem', md: '1rem' },
-            fontWeight: 300,
-            letterSpacing: '0.05em',
-            color: 'var(--mono-text-muted)',
+            fontFamily: 'var(--font-cute)',
+            color: 'var(--cute-muted)',
           }}
         >
           방문해주셔서 감사합니다
         </Typography>
-        <Box sx={{ width: 32, height: 2, bgcolor: 'var(--color-accent)', mx: 'auto', mt: 2 }} />
+        {/* 파스텔 점 3개 장식 */}
+        <Box aria-hidden sx={{ display: 'flex', justifyContent: 'center', gap: 0.75, mt: 2 }}>
+          { ['var(--cute-accent)', 'var(--color-pastel-lavender)', 'var(--color-pastel-mint)'].map((color) => (
+            <Box key={ color } sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: color }} />
+          )) }
+        </Box>
       </Box>
 
       <Box
