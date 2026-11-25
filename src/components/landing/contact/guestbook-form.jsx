@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Alert, Box, Button, Collapse, IconButton, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, IconButton, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -60,7 +60,6 @@ function GuestbookForm({ onSubmit }) {
   const [errors, setErrors] = useState({});
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('');
-  const [isExtraOpen, setIsExtraOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
   const fileInputRef = useRef(null);
@@ -118,7 +117,6 @@ function GuestbookForm({ onSubmit }) {
       await onSubmit(form, photoFile);
       setForm(INITIAL_FORM);
       updatePhoto(null);
-      setIsExtraOpen(false);
       setStatus({ type: 'success', text: '방명록이 등록되었어요. 고마워요! 💌' });
     } catch (error) {
       setStatus({ type: 'error', text: error.message });
@@ -234,71 +232,64 @@ function GuestbookForm({ onSubmit }) {
         ) }
       </Box>
 
-      {/* 선택 정보 */}
+      {/* 선택 정보: 처음부터 입력칸으로 표시 */}
       <Box>
-        <Button
-          variant="text"
-          onClick={ () => setIsExtraOpen((prev) => !prev) }
-          aria-expanded={ isExtraOpen }
-          sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, fontSize: '0.8rem', '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
-        >
-          { isExtraOpen ? '− 추가 정보 접기' : '+ 추가 정보 입력 (선택)' }
-        </Button>
-        <Collapse in={ isExtraOpen }>
-          <Stack spacing={ 2 } sx={{ pt: 1 }}>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
-              <TextField
-                variant="standard"
-                label="소속 / 직업"
-                value={ form.affiliation }
-                onChange={ handleChange('affiliation') }
-                slotProps={{ htmlInput: { maxLength: 50 } }}
-                sx={{ ...fieldSx, flex: 1 }}
-              />
-              <TextField
-                select
-                variant="standard"
-                label="나이대"
-                value={ form.ageGroup }
-                onChange={ handleChange('ageGroup') }
-                sx={{ ...fieldSx, flex: 1 }}
-              >
-                <MenuItem value="">선택 안 함</MenuItem>
-                { AGE_GROUPS.map((age) => (
-                  <MenuItem key={ age } value={ age }>{ age }</MenuItem>
-                )) }
-              </TextField>
-            </Stack>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
-              <TextField
-                variant="standard"
-                label="이메일"
-                type="email"
-                value={ form.email }
-                onChange={ handleChange('email') }
-                error={ Boolean(errors.email) }
-                helperText={ errors.email }
-                sx={{ ...fieldSx, flex: 1 }}
-              />
-              <TextField
-                variant="standard"
-                label="전화번호"
-                type="tel"
-                value={ form.phone }
-                onChange={ handleChange('phone') }
-                error={ Boolean(errors.phone) }
-                helperText={ errors.phone }
-                sx={{ ...fieldSx, flex: 1 }}
-              />
-            </Stack>
-            <Stack direction="row" spacing={ 0.75 } sx={{ alignItems: 'center' }}>
-              <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
-              <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
-                이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
-              </Typography>
-            </Stack>
+        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
+          추가 정보 (선택)
+        </Typography>
+        <Stack spacing={ 2 }>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
+            <TextField
+              variant="standard"
+              label="소속 / 직업"
+              value={ form.affiliation }
+              onChange={ handleChange('affiliation') }
+              slotProps={{ htmlInput: { maxLength: 50 } }}
+              sx={{ ...fieldSx, flex: 1 }}
+            />
+            <TextField
+              select
+              variant="standard"
+              label="나이대"
+              value={ form.ageGroup }
+              onChange={ handleChange('ageGroup') }
+              sx={{ ...fieldSx, flex: 1 }}
+            >
+              <MenuItem value="">선택 안 함</MenuItem>
+              { AGE_GROUPS.map((age) => (
+                <MenuItem key={ age } value={ age }>{ age }</MenuItem>
+              )) }
+            </TextField>
           </Stack>
-        </Collapse>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
+            <TextField
+              variant="standard"
+              label="이메일"
+              type="email"
+              value={ form.email }
+              onChange={ handleChange('email') }
+              error={ Boolean(errors.email) }
+              helperText={ errors.email }
+              sx={{ ...fieldSx, flex: 1 }}
+            />
+            <TextField
+              variant="standard"
+              label="전화번호"
+              type="tel"
+              value={ form.phone }
+              onChange={ handleChange('phone') }
+              error={ Boolean(errors.phone) }
+              helperText={ errors.phone }
+              sx={{ ...fieldSx, flex: 1 }}
+            />
+          </Stack>
+          <Stack direction="row" spacing={ 0.75 } sx={{ alignItems: 'center' }}>
+            <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
+            <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
+              이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
+            </Typography>
+          </Stack>
+        </Stack>
       </Box>
 
       { status && (
