@@ -23,8 +23,8 @@ export const SNS_LINKS = [
   { id: 'email', label: 'Email', href: 'mailto:hello@example.com', Icon: EmailOutlinedIcon },
 ];
 
-/** 방명록에서 고를 수 있는 이모지 */
-export const EMOJI_OPTIONS = ['💌', '🌸', '✨', '☕', '👏', '🙌', '💡', '🍀'];
+/** 방명록 '오늘의 기분'에서 고를 수 있는 이모지 (첫 번째가 기본 선택) */
+export const EMOJI_OPTIONS = ['😊', '🥰', '😆', '😎', '🤩', '😌', '🤔', '😴'];
 
 /** 방명록 나이대 선택지 (DB 의 age_group 체크 조건과 같아야 합니다) */
 export const AGE_GROUPS = ['10대', '20대', '30대', '40대', '50대 이상'];
