@@ -15,12 +15,14 @@ export const CONTACT_ITEMS = [
   { id: 'location', label: 'LOCATION', value: 'Seoul, Korea', Icon: PlaceOutlinedIcon },
 ];
 
-/** ✏️ SNS 링크 — 실제 계정 주소로 바꿔서 사용하세요. */
+/**
+ * ✏️ SNS 링크 — 실제 계정 주소와 아이디로 바꿔서 사용하세요.
+ * handle: 화면에 표시되는 계정 이름
+ */
 export const SNS_LINKS = [
-  { id: 'github', label: 'GitHub', href: 'https://github.com/nayeonggwon96-maker', Icon: GitHubIcon },
-  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/', Icon: InstagramIcon },
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/', Icon: LinkedInIcon },
-  { id: 'email', label: 'Email', href: 'mailto:hello@example.com', Icon: EmailOutlinedIcon },
+  { id: 'github', label: 'GITHUB', handle: '@nayeonggwon96-maker', href: 'https://github.com/nayeonggwon96-maker', Icon: GitHubIcon },
+  { id: 'instagram', label: 'INSTAGRAM', handle: '@your_instagram', href: 'https://www.instagram.com/', Icon: InstagramIcon },
+  { id: 'linkedin', label: 'LINKEDIN', handle: 'your-linkedin', href: 'https://www.linkedin.com/', Icon: LinkedInIcon },
 ];
 
 /** 방명록 '오늘의 기분'에서 고를 수 있는 이모지 (첫 번째가 기본 선택) */
