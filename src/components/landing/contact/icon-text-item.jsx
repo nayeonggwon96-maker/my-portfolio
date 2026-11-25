@@ -18,7 +18,7 @@ function IconTextItem({ Icon, label, value, href }) {
   const isExternal = href?.startsWith('http');
 
   return (
-    <Stack component="li" direction="row" spacing={ 2 } alignItems="center">
+    <Stack component="li" direction="row" spacing={ 2 } sx={{ alignItems: 'center' }}>
       <Box
         sx={{
           flexShrink: 0,

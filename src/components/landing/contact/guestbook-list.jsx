@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Alert, Box, CircularProgress, Dialog, Typography } from '@mui/material';
-import GuestbookNote from './guestbook-note';
+import { Alert, Box, CircularProgress, Dialog, Stack, Typography } from '@mui/material';
+import GuestbookItem from './guestbook-item';
 
 /**
  * GuestbookList 컴포넌트
- * 방명록 쪽지들을 최신순으로 보여줍니다. (GuestbookPanel 안에서 사용)
+ * 방명록을 최신순 리스트로 보여줍니다. (GuestbookPanel 안에서 사용)
  * 많아지면 목록 영역 안에서 스크롤됩니다.
  * 쪽지의 사진을 누르면 크게 볼 수 있습니다.
  *
@@ -40,22 +40,22 @@ function GuestbookList({ entries, isLoading, loadError }) {
       );
     }
     return (
-      <Box
+      <Stack
+        component="ul"
+        divider={ <Box component="li" aria-hidden sx={{ borderTop: '1px solid var(--mono-border)' }} /> }
         sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-          gap: 2,
-          alignItems: 'start',
+          listStyle: 'none',
+          m: 0,
+          p: 0,
+          borderTop: '1px solid var(--mono-ink)',
           maxHeight: { xs: 480, md: 620 },
           overflowY: 'auto',
-          p: 1,
-          m: -1,
         }}
       >
-        { entries.map((entry, index) => (
-          <GuestbookNote key={ entry.id } entry={ entry } index={ index } onPhotoClick={ setOpenPhoto } />
+        { entries.map((entry) => (
+          <GuestbookItem key={ entry.id } entry={ entry } onPhotoClick={ setOpenPhoto } />
         )) }
-      </Box>
+      </Stack>
     );
   };
 

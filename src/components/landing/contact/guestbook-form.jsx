@@ -291,7 +291,7 @@ function GuestbookForm({ onSubmit }) {
                 sx={{ ...fieldSx, flex: 1 }}
               />
             </Stack>
-            <Stack direction="row" spacing={ 0.75 } alignItems="center">
+            <Stack direction="row" spacing={ 0.75 } sx={{ alignItems: 'center' }}>
               <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
               <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
                 이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
