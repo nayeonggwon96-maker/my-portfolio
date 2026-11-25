@@ -25,7 +25,7 @@ const fieldSx = {
   '& .MuiInputLabel-root.Mui-error': { color: 'error.main' },
   '& .MuiOutlinedInput-root': {
     borderRadius: '16px',
-    bgcolor: 'var(--cute-soft)',
+    bgcolor: 'var(--cute-card)',
     color: 'var(--cute-ink)',
     '& fieldset': { borderColor: 'var(--cute-border)', borderWidth: 2 },
     '&:hover fieldset': { borderColor: 'var(--cute-accent)' },
