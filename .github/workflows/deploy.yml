@@ -14,12 +14,12 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# build 와 deploy 를 별도 job 으로 나눕니다. (GitHub 공식 Pages 예제 구조)
+# 같은 job 에서 업로드 직후 바로 배포하면 아티팩트가 아직 조회되지 않아
+# "No artifacts named github-pages" 오류가 날 수 있기 때문입니다.
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -38,6 +38,14 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: './dist'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
