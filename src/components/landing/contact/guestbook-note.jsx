@@ -5,8 +5,21 @@ import { formatDate } from '../../../utils/format-date';
 const TILTS = ['-1.2deg', '0.8deg', '-0.4deg', '1.1deg'];
 
 /**
+ * 쪽지 배경색 목록 (index.css 의 --note-* 변수, 다크모드 자동 대응)
+ * 방명록 id 로 색을 고르므로 새 쪽지가 추가돼도 기존 쪽지 색은 바뀌지 않습니다.
+ */
+const NOTE_COLORS = [
+  'var(--note-pink)',
+  'var(--note-lavender)',
+  'var(--note-mint)',
+  'var(--note-lime)',
+  'var(--note-butter)',
+];
+
+/**
  * GuestbookNote 컴포넌트
  * 방명록 한 개를 오른쪽 위 모서리가 접힌 쪽지 모양으로 보여줍니다.
+ * 쪽지마다 파스텔 배경색이 다르게 적용됩니다.
  *
  * Props:
  * @param {object} entry - 방명록 데이터 (display_name, message, emoji, created_at 등) [Required]
@@ -26,7 +39,7 @@ function GuestbookNote({ entry, index, onPhotoClick }) {
         position: 'relative',
         p: 2,
         pr: 2.5,
-        bgcolor: 'var(--mono-surface-muted)',
+        bgcolor: NOTE_COLORS[entry.id % NOTE_COLORS.length],
         borderRadius: '4px',
         transform: `rotate(${TILTS[index % TILTS.length]})`,
         transition: 'transform 0.2s',
@@ -40,7 +53,7 @@ function GuestbookNote({ entry, index, onPhotoClick }) {
           right: 0,
           width: 16,
           height: 16,
-          background: 'linear-gradient(225deg, var(--mono-surface) 50%, var(--mono-border) 50%)',
+          background: 'linear-gradient(225deg, var(--mono-surface) 50%, rgba(0, 0, 0, 0.1) 50%)',
           borderBottomLeftRadius: '3px',
         },
       }}
@@ -79,7 +92,7 @@ function GuestbookNote({ entry, index, onPhotoClick }) {
         </Box>
       ) }
 
-      <Stack sx={{ mt: 1.5, pt: 1.25, borderTop: '1px dashed var(--mono-border)' }}>
+      <Stack sx={{ mt: 1.5, pt: 1.25, borderTop: '1px dashed rgba(128, 128, 128, 0.35)' }}>
         <Typography sx={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--mono-ink)' }}>
           From. { entry.display_name }
         </Typography>
