@@ -9,24 +9,26 @@ import { Box, Typography } from '@mui/material';
  * @param {string} eyebrow - 제목 위의 작은 영문 라벨 (예: 'CONTACT') [Required]
  * @param {string} title - 카드 제목 [Required]
  * @param {React.ReactNode} children - 카드 내용 [Required]
- * @param {boolean} isDark - 검정 배경(반전) 카드 여부 [Optional, 기본값: false]
+ * @param {'outlined'|'plain'} variant - 'outlined' 는 테두리 카드, 'plain' 은 테두리·배경 없이 내용만 표시 [Optional, 기본값: 'outlined']
  *
  * Example usage:
  * <ContactPanel eyebrow="CONTACT" title="연락처">내용</ContactPanel>
  */
-function ContactPanel({ eyebrow, title, children, isDark = false }) {
+function ContactPanel({ eyebrow, title, children, variant = 'outlined' }) {
+  const isPlain = variant === 'plain';
+
   return (
     <Box
       sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        p: { xs: 3, md: 4 },
+        p: isPlain ? { xs: 1, md: 4 } : { xs: 3, md: 4 },
         borderRadius: 2,
         border: '1px solid',
-        borderColor: isDark ? 'var(--mono-ink)' : 'var(--mono-border)',
-        bgcolor: isDark ? 'var(--mono-ink)' : 'var(--mono-surface)',
-        color: isDark ? 'var(--mono-ink-inverse)' : 'var(--mono-ink)',
+        borderColor: isPlain ? 'transparent' : 'var(--mono-border)',
+        bgcolor: isPlain ? 'transparent' : 'var(--mono-surface)',
+        color: 'var(--mono-ink)',
       }}
     >
       <Typography
