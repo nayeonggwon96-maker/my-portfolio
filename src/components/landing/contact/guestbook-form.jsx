@@ -18,14 +18,21 @@ const INITIAL_FORM = {
 const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE_PATTERN = /^[0-9+\- ]{7,20}$/;
 
-/** 밑줄형 입력칸 공통 스타일 (무채색) */
+/** 테두리형 입력칸 공통 스타일 (무채색) */
 const fieldSx = {
   '& .MuiInputLabel-root': { color: 'var(--mono-text-muted)' },
   '& .MuiInputLabel-root.Mui-focused': { color: 'var(--mono-ink)' },
-  '& .MuiInputBase-input': { color: 'var(--mono-ink)' },
-  '& .MuiInput-underline:before': { borderBottomColor: 'var(--mono-border)' },
-  '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottomColor: 'var(--mono-ink)' },
-  '& .MuiInput-underline:after': { borderBottomColor: 'var(--mono-ink)' },
+  '& .MuiInputLabel-root.Mui-error': { color: 'error.main' },
+  '& .MuiOutlinedInput-root': {
+    borderRadius: 1,
+    bgcolor: 'var(--mono-surface)',
+    color: 'var(--mono-ink)',
+    '& fieldset': { borderColor: 'var(--mono-border)' },
+    '&:hover fieldset': { borderColor: 'var(--mono-text-muted)' },
+    '&.Mui-focused fieldset': { borderColor: 'var(--mono-ink)', borderWidth: 1 },
+    '&.Mui-error fieldset': { borderColor: 'error.main' },
+  },
+  '& .MuiFormHelperText-root': { mx: 0.5 },
   '& .MuiSvgIcon-root': { color: 'var(--mono-text-muted)' },
 };
 
@@ -164,7 +171,7 @@ function GuestbookForm({ onSubmit }) {
       </Box>
 
       <TextField
-        variant="standard"
+        variant="outlined"
         label="이름 *"
         value={ form.authorName }
         onChange={ handleChange('authorName') }
@@ -175,7 +182,7 @@ function GuestbookForm({ onSubmit }) {
       />
 
       <TextField
-        variant="standard"
+        variant="outlined"
         label="메시지 *"
         value={ form.message }
         onChange={ handleChange('message') }
@@ -234,13 +241,13 @@ function GuestbookForm({ onSubmit }) {
 
       {/* 선택 정보: 처음부터 입력칸으로 표시 */}
       <Box>
-        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
+        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)', mb: 1.5 }}>
           추가 정보 (선택)
         </Typography>
         <Stack spacing={ 2 }>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
             <TextField
-              variant="standard"
+              variant="outlined"
               label="소속 / 직업"
               value={ form.affiliation }
               onChange={ handleChange('affiliation') }
@@ -249,7 +256,7 @@ function GuestbookForm({ onSubmit }) {
             />
             <TextField
               select
-              variant="standard"
+              variant="outlined"
               label="나이대"
               value={ form.ageGroup }
               onChange={ handleChange('ageGroup') }
@@ -263,7 +270,7 @@ function GuestbookForm({ onSubmit }) {
           </Stack>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
             <TextField
-              variant="standard"
+              variant="outlined"
               label="이메일"
               type="email"
               value={ form.email }
@@ -273,7 +280,7 @@ function GuestbookForm({ onSubmit }) {
               sx={{ ...fieldSx, flex: 1 }}
             />
             <TextField
-              variant="standard"
+              variant="outlined"
               label="전화번호"
               type="tel"
               value={ form.phone }
