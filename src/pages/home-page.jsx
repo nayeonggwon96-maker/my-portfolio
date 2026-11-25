@@ -1,7 +1,8 @@
 import { Stack } from '@mui/material';
 import SectionCard from '../components/ui/section-card';
+import ContactSection from '../components/landing/contact/contact-section';
 
-/** Home 페이지 섹션 목록 (화면에 표시되는 순서대로) */
+/** Home 페이지 자리 표시 섹션 목록 (화면에 표시되는 순서대로, Contact 는 별도 컴포넌트) */
 const homeSections = [
   {
     id: 'hero',
@@ -33,13 +34,6 @@ const homeSections = [
     description: '여기는 Projects 섹션입니다. 대표작 썸네일 3-4개와 \'더 보기\' 버튼이 들어갈 예정입니다.',
     background: 'var(--color-bg-secondary)',
   },
-  {
-    id: 'contact',
-    label: 'SECTION 05 · CONTACT',
-    title: 'Contact',
-    description: '여기는 Contact 섹션입니다. 연락처, SNS, 간단한 메시지 폼이 들어갈 예정입니다.',
-    background: 'var(--surface-pastel-mint)',
-  },
 ];
 
 /**
@@ -57,6 +51,7 @@ function HomePage() {
       { homeSections.map(({ id, ...section }) => (
         <SectionCard key={ id } { ...section } />
       )) }
+      <ContactSection />
     </Stack>
   );
 }
