@@ -3,7 +3,6 @@ import { Alert, Box, Button, Collapse, IconButton, MenuItem, Stack, TextField, T
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import ContactPanel from './contact-panel';
 import { AGE_GROUPS, EMOJI_OPTIONS, MAX_PHOTO_SIZE } from './contact-data';
 
 const INITIAL_FORM = {
@@ -46,7 +45,8 @@ function validate(form) {
 
 /**
  * GuestbookForm 컴포넌트
- * 쪽지 형태의 방명록을 작성하는 폼입니다. 이모지 선택과 사진 1장 업로드를 지원합니다.
+ * 쪽지 형태의 방명록을 작성하는 폼입니다. (GuestbookPanel 안에서 사용)
+ * 이모지 선택과 사진 1장 업로드를 지원합니다.
  * 이메일 · 전화번호는 비공개로 저장되고, 이름은 화면에 '권ㅇ영' 처럼 가려져서 표시됩니다.
  *
  * Props:
@@ -128,205 +128,205 @@ function GuestbookForm({ onSubmit }) {
   };
 
   return (
-    <ContactPanel eyebrow="GUESTBOOK" title="쪽지 남기기">
-      <Stack component="form" spacing={ 2.5 } onSubmit={ handleSubmit } noValidate>
-        {/* 이모지 선택 */}
-        <Box>
-          <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)', mb: 1 }}>
-            오늘의 기분
-          </Typography>
-          <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }} role="radiogroup" aria-label="이모지 선택">
-            { EMOJI_OPTIONS.map((emoji) => {
-              const isSelected = form.emoji === emoji;
-              return (
-                <Box
-                  key={ emoji }
-                  component="button"
-                  type="button"
-                  role="radio"
-                  aria-checked={ isSelected }
-                  onClick={ () => setForm((prev) => ({ ...prev, emoji })) }
-                  sx={{
-                    width: 36,
-                    height: 36,
-                    fontSize: '1.1rem',
-                    cursor: 'pointer',
-                    borderRadius: '50%',
-                    border: '1px solid',
-                    borderColor: isSelected ? 'var(--mono-ink)' : 'var(--mono-border)',
-                    bgcolor: isSelected ? 'var(--mono-surface-muted)' : 'transparent',
-                    transition: 'all 0.15s',
-                    '&:hover': { borderColor: 'var(--mono-ink)' },
-                  }}
-                >
-                  { emoji }
-                </Box>
-              );
-            }) }
-          </Stack>
-        </Box>
-
-        <TextField
-          variant="standard"
-          label="이름 *"
-          value={ form.authorName }
-          onChange={ handleChange('authorName') }
-          error={ Boolean(errors.authorName) }
-          helperText={ errors.authorName || '화면에는 권ㅇ영 처럼 가려서 표시돼요.' }
-          slotProps={{ htmlInput: { maxLength: 20 } }}
-          sx={ fieldSx }
-        />
-
-        <TextField
-          variant="standard"
-          label="메시지 *"
-          value={ form.message }
-          onChange={ handleChange('message') }
-          error={ Boolean(errors.message) }
-          helperText={ errors.message || `${form.message.length} / 500` }
-          multiline
-          minRows={ 3 }
-          slotProps={{ htmlInput: { maxLength: 500 } }}
-          sx={ fieldSx }
-        />
-
-        {/* 사진 업로드 */}
-        <Box>
-          <input
-            ref={ fileInputRef }
-            type="file"
-            accept="image/jpeg,image/png,image/webp,image/gif"
-            hidden
-            onChange={ handlePhotoChange }
-          />
-          { photoPreview ? (
-            <Box sx={{ position: 'relative', width: 96, height: 96 }}>
+    <Stack component="form" spacing={ 2.5 } onSubmit={ handleSubmit } noValidate>
+      {/* 이모지 선택 */}
+      <Box>
+        <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)', mb: 1 }}>
+          오늘의 기분
+        </Typography>
+        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }} role="radiogroup" aria-label="이모지 선택">
+          { EMOJI_OPTIONS.map((emoji) => {
+            const isSelected = form.emoji === emoji;
+            return (
               <Box
-                component="img"
-                src={ photoPreview }
-                alt="업로드할 사진 미리보기"
-                sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1.5 }}
-              />
-              <IconButton
-                size="small"
-                aria-label="사진 삭제"
-                onClick={ () => updatePhoto(null) }
+                key={ emoji }
+                component="button"
+                type="button"
+                role="radio"
+                aria-checked={ isSelected }
+                onClick={ () => setForm((prev) => ({ ...prev, emoji })) }
                 sx={{
-                  position: 'absolute',
-                  top: -10,
-                  right: -10,
-                  bgcolor: 'var(--mono-ink)',
-                  color: 'var(--mono-ink-inverse)',
-                  '&:hover': { bgcolor: 'var(--mono-ink)' },
+                  width: 36,
+                  height: 36,
+                  fontSize: '1.1rem',
+                  cursor: 'pointer',
+                  borderRadius: '50%',
+                  border: '1px solid',
+                  borderColor: isSelected ? 'var(--mono-ink)' : 'var(--mono-border)',
+                  bgcolor: isSelected ? 'var(--mono-surface-muted)' : 'transparent',
+                  transition: 'all 0.15s',
+                  '&:hover': { borderColor: 'var(--mono-ink)' },
                 }}
               >
-                <CloseIcon sx={{ fontSize: 14 }} />
-              </IconButton>
-            </Box>
-          ) : (
-            <Button
-              variant="text"
-              startIcon={ <AddPhotoAlternateOutlinedIcon /> }
-              onClick={ () => fileInputRef.current?.click() }
-              sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
-            >
-              사진 첨부 (선택 · 5MB 이하)
-            </Button>
-          ) }
-        </Box>
+                { emoji }
+              </Box>
+            );
+          }) }
+        </Stack>
+      </Box>
 
-        {/* 선택 정보 */}
-        <Box>
+      <TextField
+        variant="standard"
+        label="이름 *"
+        value={ form.authorName }
+        onChange={ handleChange('authorName') }
+        error={ Boolean(errors.authorName) }
+        helperText={ errors.authorName || '화면에는 권ㅇ영 처럼 가려서 표시돼요.' }
+        slotProps={{ htmlInput: { maxLength: 20 } }}
+        sx={ fieldSx }
+      />
+
+      <TextField
+        variant="standard"
+        label="메시지 *"
+        value={ form.message }
+        onChange={ handleChange('message') }
+        error={ Boolean(errors.message) }
+        helperText={ errors.message || `${form.message.length} / 500` }
+        multiline
+        minRows={ 3 }
+        slotProps={{ htmlInput: { maxLength: 500 } }}
+        sx={ fieldSx }
+      />
+
+      {/* 사진 업로드 */}
+      <Box>
+        <input
+          ref={ fileInputRef }
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          hidden
+          onChange={ handlePhotoChange }
+        />
+        { photoPreview ? (
+          <Box sx={{ position: 'relative', width: 96, height: 96 }}>
+            <Box
+              component="img"
+              src={ photoPreview }
+              alt="업로드할 사진 미리보기"
+              sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1.5 }}
+            />
+            <IconButton
+              size="small"
+              aria-label="사진 삭제"
+              onClick={ () => updatePhoto(null) }
+              sx={{
+                position: 'absolute',
+                top: -10,
+                right: -10,
+                bgcolor: 'var(--mono-ink)',
+                color: 'var(--mono-ink-inverse)',
+                '&:hover': { bgcolor: 'var(--mono-ink)' },
+              }}
+            >
+              <CloseIcon sx={{ fontSize: 14 }} />
+            </IconButton>
+          </Box>
+        ) : (
           <Button
             variant="text"
-            onClick={ () => setIsExtraOpen((prev) => !prev) }
-            aria-expanded={ isExtraOpen }
-            sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, fontSize: '0.8rem', '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
+            startIcon={ <AddPhotoAlternateOutlinedIcon /> }
+            onClick={ () => fileInputRef.current?.click() }
+            sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
           >
-            { isExtraOpen ? '− 추가 정보 접기' : '+ 추가 정보 입력 (선택)' }
+            사진 첨부 (선택 · 5MB 이하)
           </Button>
-          <Collapse in={ isExtraOpen }>
-            <Stack spacing={ 2 } sx={{ pt: 1 }}>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
-                <TextField
-                  variant="standard"
-                  label="소속 / 직업"
-                  value={ form.affiliation }
-                  onChange={ handleChange('affiliation') }
-                  slotProps={{ htmlInput: { maxLength: 50 } }}
-                  sx={{ ...fieldSx, flex: 1 }}
-                />
-                <TextField
-                  select
-                  variant="standard"
-                  label="나이대"
-                  value={ form.ageGroup }
-                  onChange={ handleChange('ageGroup') }
-                  sx={{ ...fieldSx, flex: 1 }}
-                >
-                  <MenuItem value="">선택 안 함</MenuItem>
-                  { AGE_GROUPS.map((age) => (
-                    <MenuItem key={ age } value={ age }>{ age }</MenuItem>
-                  )) }
-                </TextField>
-              </Stack>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
-                <TextField
-                  variant="standard"
-                  label="이메일"
-                  type="email"
-                  value={ form.email }
-                  onChange={ handleChange('email') }
-                  error={ Boolean(errors.email) }
-                  helperText={ errors.email }
-                  sx={{ ...fieldSx, flex: 1 }}
-                />
-                <TextField
-                  variant="standard"
-                  label="전화번호"
-                  type="tel"
-                  value={ form.phone }
-                  onChange={ handleChange('phone') }
-                  error={ Boolean(errors.phone) }
-                  helperText={ errors.phone }
-                  sx={{ ...fieldSx, flex: 1 }}
-                />
-              </Stack>
-              <Stack direction="row" spacing={ 0.75 } alignItems="center">
-                <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
-                <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
-                  이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
-                </Typography>
-              </Stack>
-            </Stack>
-          </Collapse>
-        </Box>
-
-        { status && (
-          <Alert severity={ status.type } onClose={ () => setStatus(null) } sx={{ borderRadius: 1.5 }}>
-            { status.text }
-          </Alert>
         ) }
+      </Box>
 
+      {/* 선택 정보 */}
+      <Box>
         <Button
-          type="submit"
-          variant="contained"
-          disableElevation
-          disabled={ isSubmitting }
-          sx={{
-            py: 1.4,
-            borderRadius: 1,
-            bgcolor: 'var(--mono-ink)',
-            color: 'var(--mono-ink-inverse)',
-            letterSpacing: '0.15em',
-            fontWeight: 600,
-            '&:hover': { bgcolor: 'var(--color-accent)', color: '#000000' },
-          }}
+          variant="text"
+          onClick={ () => setIsExtraOpen((prev) => !prev) }
+          aria-expanded={ isExtraOpen }
+          sx={{ color: 'var(--mono-text-muted)', textTransform: 'none', px: 0, fontSize: '0.8rem', '&:hover': { color: 'var(--mono-ink)', bgcolor: 'transparent' } }}
         >
-          { isSubmitting ? '등록 중...' : 'SEND' }
+          { isExtraOpen ? '− 추가 정보 접기' : '+ 추가 정보 입력 (선택)' }
         </Button>
-      </Stack>
-    </ContactPanel>
+        <Collapse in={ isExtraOpen }>
+          <Stack spacing={ 2 } sx={{ pt: 1 }}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
+              <TextField
+                variant="standard"
+                label="소속 / 직업"
+                value={ form.affiliation }
+                onChange={ handleChange('affiliation') }
+                slotProps={{ htmlInput: { maxLength: 50 } }}
+                sx={{ ...fieldSx, flex: 1 }}
+              />
+              <TextField
+                select
+                variant="standard"
+                label="나이대"
+                value={ form.ageGroup }
+                onChange={ handleChange('ageGroup') }
+                sx={{ ...fieldSx, flex: 1 }}
+              >
+                <MenuItem value="">선택 안 함</MenuItem>
+                { AGE_GROUPS.map((age) => (
+                  <MenuItem key={ age } value={ age }>{ age }</MenuItem>
+                )) }
+              </TextField>
+            </Stack>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={ 2 }>
+              <TextField
+                variant="standard"
+                label="이메일"
+                type="email"
+                value={ form.email }
+                onChange={ handleChange('email') }
+                error={ Boolean(errors.email) }
+                helperText={ errors.email }
+                sx={{ ...fieldSx, flex: 1 }}
+              />
+              <TextField
+                variant="standard"
+                label="전화번호"
+                type="tel"
+                value={ form.phone }
+                onChange={ handleChange('phone') }
+                error={ Boolean(errors.phone) }
+                helperText={ errors.phone }
+                sx={{ ...fieldSx, flex: 1 }}
+              />
+            </Stack>
+            <Stack direction="row" spacing={ 0.75 } alignItems="center">
+              <LockOutlinedIcon sx={{ fontSize: 14, color: 'var(--mono-text-muted)' }} />
+              <Typography sx={{ fontSize: '0.75rem', color: 'var(--mono-text-muted)' }}>
+                이메일과 전화번호는 비공개로 저장되며 방명록에 표시되지 않아요.
+              </Typography>
+            </Stack>
+          </Stack>
+        </Collapse>
+      </Box>
+
+      { status && (
+        <Alert severity={ status.type } onClose={ () => setStatus(null) } sx={{ borderRadius: 1.5 }}>
+          { status.text }
+        </Alert>
+      ) }
+
+      <Button
+        type="submit"
+        variant="contained"
+        disableElevation
+        disabled={ isSubmitting }
+        sx={{
+          py: 1.4,
+          px: 6,
+          alignSelf: { md: 'flex-end' },
+          borderRadius: 1,
+          bgcolor: 'var(--mono-ink)',
+          color: 'var(--mono-ink-inverse)',
+          letterSpacing: '0.15em',
+          fontWeight: 600,
+          '&:hover': { bgcolor: 'var(--color-accent)', color: '#000000' },
+        }}
+      >
+        { isSubmitting ? '등록 중...' : 'SEND' }
+      </Button>
+    </Stack>
   );
 }
 

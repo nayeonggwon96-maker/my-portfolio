@@ -1,15 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import { useGuestbook } from '../../../hooks/use-guestbook';
 import ContactInfoCard from './contact-info-card';
-import GuestbookForm from './guestbook-form';
-import GuestbookList from './guestbook-list';
+import GuestbookPanel from './guestbook-panel';
 import SnsLinksCard from './sns-links-card';
 
 /**
  * ContactSection 컴포넌트
- * Home 페이지의 Contact 섹션입니다. 무채색 톤의 2x2 그리드로 구성됩니다.
- * - 윗줄: 연락처 카드 | SNS 링크
- * - 아랫줄: 방명록 쓰기 | 받은 쪽지 목록
+ * Home 페이지의 Contact 섹션입니다. 무채색 톤으로 구성됩니다.
+ * - 윗줄: 연락처 | SNS (좌우 2칸)
+ * - 아랫줄: 방명록 (쪽지 남기기 + 받은 쪽지, 가로 전체 1칸)
  * 모바일에서는 한 줄에 하나씩 세로로 쌓입니다.
  *
  * Props: 없음
@@ -78,8 +77,9 @@ function ContactSection() {
       >
         <ContactInfoCard />
         <SnsLinksCard />
-        <GuestbookForm onSubmit={ addEntry } />
-        <GuestbookList entries={ entries } isLoading={ isLoading } loadError={ loadError } />
+        <Box sx={{ gridColumn: '1 / -1' }}>
+          <GuestbookPanel entries={ entries } isLoading={ isLoading } loadError={ loadError } onSubmit={ addEntry } />
+        </Box>
       </Box>
     </Box>
   );

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Alert, Box, CircularProgress, Dialog, Typography } from '@mui/material';
-import ContactPanel from './contact-panel';
 import GuestbookNote from './guestbook-note';
 
 /**
  * GuestbookList 컴포넌트
- * 방명록 쪽지들을 최신순으로 보여줍니다. 많아지면 카드 안에서 스크롤됩니다.
+ * 방명록 쪽지들을 최신순으로 보여줍니다. (GuestbookPanel 안에서 사용)
+ * 많아지면 목록 영역 안에서 스크롤됩니다.
  * 쪽지의 사진을 누르면 크게 볼 수 있습니다.
  *
  * Props:
@@ -60,7 +60,7 @@ function GuestbookList({ entries, isLoading, loadError }) {
   };
 
   return (
-    <ContactPanel eyebrow="MESSAGES" title="받은 쪽지">
+    <>
       { renderContent() }
 
       <Dialog open={ Boolean(openPhoto) } onClose={ () => setOpenPhoto('') } maxWidth="md">
@@ -74,7 +74,7 @@ function GuestbookList({ entries, isLoading, loadError }) {
           />
         ) }
       </Dialog>
-    </ContactPanel>
+    </>
   );
 }
 
